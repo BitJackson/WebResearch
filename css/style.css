@@ -1,0 +1,38 @@
+.content {
+	margin-top: 50px;
+}
+html { 
+	height: 100% 
+}
+body { 
+	height: 100%; 
+	margin: 0; 
+	padding: 0 
+}
+a {
+	width: 150px;
+	margin-bottom: 5px;
+	float: left;
+	position: relative;
+}
+#map_canvas { 
+	height: 100%;
+	width: 100%; 
+}
+#message_panel {
+	position: absolute;
+	right: 10px;
+	top: 50px;
+	width: 135px;
+	height: 90px;
+	background-color: rgba(255, 255, 255, 0.3);
+	z-index: 999;
+	padding: 20px;
+}
+#option_panel {
+	position: absolute;
+	right: 35px;
+	top: 185px;
+	width: 150px;
+	z-index: 999;
+}

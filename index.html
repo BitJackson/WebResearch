@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNvz0O7RAH6vdlhU-mw0wDvEq1XNOvu_Q&sensor=true">
+    </script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="framework.js">
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="message_panel">
+      <p id="message"></p>
+    </div>
+    <div id="option_panel">
+      <a id="createNodeButton" onClick="toggleNodeCreate();" class="btn">Create a node</a>
+      <a id="createRouteButton" href="#" onClick="toggleRouteCreate();" class="btn">Create a route</a> 
+    </div>
+    <div id="map_canvas">
+
+    </div>
+  </body>
+</html>
