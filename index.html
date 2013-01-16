@@ -16,8 +16,18 @@
       <p id="message"></p>
     </div>
     <div id="option_panel">
-      <a id="createNodeButton" onClick="toggleNodeCreate();" class="btn">Create a node</a>
-      <a id="createRouteButton" href="#" onClick="toggleRouteCreate();" class="btn">Create a route</a> 
+      <a id="createNodeButton" onClick="toggleNodeCreate();" class="btn">Create Nodes</a>
+      <a id="createRouteButton" href="#" onClick="toggleRouteCreate();" class="btn">Create Routes</a>
+    </div>
+    <div id="properties_panel">
+      <p id="distance">540km</p>
+      <img onClick="unselectRoute();">close</img>
+    </div>  
+    <div id="simulator_panel">
+       <a id="routeFinderButton" href="#" onClick="findRoute();" class="btn btn-success">Run RouteFinder</a> 
+       <select id="algorithm_choice">
+        <option>Dijkstra's</option>
+      </select>
     </div>
     <div id="map_canvas">
 
