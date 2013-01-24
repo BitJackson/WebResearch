@@ -5,16 +5,8 @@ var routeFindStage = 0;
 var markers = new Array();
 var routes = new Array();
 var startMarker, endMarker;
+var selectedRoutePath;
 var selectedRoute;
-var mapzz = { a:{b:10,c:4},
-           b:{a:10,e:50},
-           c:{a:4,d:13,e:20},
-           d:{c:12,f:68},
-           e:{b:50,c:20,f:70,g:45},
-           f:{d:68,e:70,g:8,h:28},
-           g:{e:45,f:8},
-           h:{f:28}
-           };	
 var genMap = {};
 
 function initialize() {
@@ -199,20 +191,36 @@ function createRoute(startMarker, endMarker) {
 
 	// TODO: This is the route array where we would save any route information,
 	// such as safety and other modifiers.
-	var route =[startMarker.__gm_id, endMarker.__gm_id, distance];
+	var route =[startMarker.__gm_id, endMarker.__gm_id, distance, routePath, 1];
 
 	routes.push(route);
 
-	google.maps.event.addListener(routePath, "click", highlightRoute);
+	google.maps.event.addListener(routePath, "click", clickRoute);
 
-	function highlightRoute() {
-		routePath.setOptions({strokeColor:'blue'});
+	function clickRoute() {
+		if (selectedRoutePath) {
+			selectedRoutePath.setOptions({strokeColor:'red'});
+		}
+		selectedRoutePath = routePath;
+		selectedRoute = route;
+		selectedRoutePath.setOptions({strokeColor:'blue'});
 		document.getElementById("properties_panel").style.display = "block";
-		document.getElementById("distance").innerHTML = distance;
-		selectedRoute = routePath;
+		document.getElementById("distance").innerHTML = distance.toFixed(2);
+		document.getElementById("danger_level").value = selectedRoute[4];
 	}
 
 	routePath.setMap(map);
+}
+
+function editSelectedRoute() {
+	for (var r = 0; r < routes.length; r++) {
+		var route = routes[r];
+
+		if (route[0] == selectedRoute[0] && route[1] == selectedRoute[1]) {
+			routes[r][4] = document.getElementById("danger_level").value;
+		}
+		
+	}
 }
 
 function runRouteFinder(startMarker, endMarker) {
@@ -239,13 +247,39 @@ function runRouteFinder(startMarker, endMarker) {
 	}
 
 	graph = new Graph(genMap);
-	alert(graph.findShortestPath(startMarker.__gm_id, endMarker.__gm_id));
+	var routeArray = graph.findShortestPath(startMarker.__gm_id, endMarker.__gm_id);
+	resetRouteHighlights();
+	var firstPoint;
+	var lastPoint;
+	for (var i = 0; i < routeArray.length - 1; i++) {
+
+		firstPoint = routeArray[i];
+		lastPoint = routeArray[i+1];
+
+		for (var r = 0; r < routes.length; r++) {
+			var route = routes[r];
+
+			if (route[0] == firstPoint && route[1] == lastPoint) {
+				route[3].setOptions({strokeColor:'green'});
+			}
+			if (route[1] == firstPoint && route[0] == lastPoint) {
+				route[3].setOptions({strokeColor:'green'});
+			}
+			
+		}
+	}
 
 }
 
+function resetRouteHighlights() {
+	for (var r = 0; r < routes.length; r++) {
+		routes[r][3].setOptions({strokeColor:'red'});
+	}
+}
+
 function unselectRoute() {
-	// When the close button is pushed, make the line go back to red and hide the box.
-	selectedRoute.setOptions({strokeColor:'red'});
+	selectedRoutePath.setOptions({strokeColor:'red'});
+	selectedRoutePath = null;
 	document.getElementById("properties_panel").style.display = "none";
 }
 

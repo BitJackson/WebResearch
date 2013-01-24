@@ -20,8 +20,19 @@
       <a id="createRouteButton" href="#" onClick="toggleRouteCreate();" class="btn">Create Routes</a>
     </div>
     <div id="properties_panel">
-      <p id="distance">540km</p>
-      <img onClick="unselectRoute();">close</img>
+      <a href="#" class="close" onClick="unselectRoute();">x</a>
+      <h5>Route Options</h5>
+      <p>Distance: <span id="distance">540</span>km</p>
+      <p>Safety (lower = safer)</p>
+      <select id="danger_level">
+        <option value="1">Perfectly Safe</option>
+        <option value="2">Slightly less Safe</option>
+        <option value="3">Even more-so less Safe</option>
+        <option value="4">Not close to being Safe</option>
+        <option value="5">Not even remotely Safe</option>
+      </select>
+      <a href="#" class="btn btn-success" onClick="">Save Route</a>
+      <a href="#" class="btn btn-danger" onClick="">DELETE Route</a>
     </div>  
     <div id="simulator_panel">
        <a id="routeFinderButton" href="#" onClick="findRoute();" class="btn btn-success">Run RouteFinder</a> 

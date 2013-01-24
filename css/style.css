@@ -42,18 +42,29 @@ a {
 #properties_panel {
 	position: absolute;
 	right: 10px;
-	top: 250px;
-	width: 135px;
-	height: 30px;
+	top: 400px;
+	width: 165px;
+	height: 210px;
 	background-color: rgba(255, 255, 255, 0.3);
 	z-index: 999;
-	padding: 20px;
 	display: none;
+	padding: 5px;
+}
+#properties_panel .btn {
+	width: 135px;
+	margin-bottom: 5px;
+}
+#properties_panel select {
+	width: 160px !important;
+}
+#properties_panel .close {
+	float: right;
+	width: auto;
 }
 #simulator_panel {
 	position: absolute;
 	right: 35px;
-	top: 340px;
+	top: 270px;
 	width: 150px;
 	z-index: 999;
 }
